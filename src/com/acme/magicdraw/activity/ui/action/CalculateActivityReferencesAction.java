@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.acme.magicdraw.activity.ui.query.CallerActivities;
+import javax.annotation.Nonnull;
+
+import com.acme.magicdraw.activity.ui.query.CallerActivitiesQuery;
+import com.acme.magicdraw.activity.ui.query.CallerActivitiesQueryResult;
 import com.acme.magicdraw.activity.ui.result.ReferencedActivitiesResult;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
@@ -23,28 +26,33 @@ public class CalculateActivityReferencesAction extends DefaultBrowserAction {
 		super(id, name, null, null);
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		Tree tree = getTree();
 
-		Project project = Application.getInstance().getProject();
-		List<String> selectedActivityIds = selectedActivities(tree);
+		if (tree != null) {
 
-		CallerActivities query = new CallerActivities(project, selectedActivityIds);
-		Map<String, List<Activity>> activityMap = query.callerActivities();
+			Project project = Application.getInstance()
+			                             .getProject();
+			
+			List<String> selectedActivityIds = selectedActivities(tree);
 
-		ReferencedActivitiesResult result = new ReferencedActivitiesResult(project);
-		result.display(activityMap);
+			CallerActivitiesQuery query = new CallerActivitiesQuery(project, selectedActivityIds);
+			CallerActivitiesQueryResult queryResult = query.execute();
+
+			ReferencedActivitiesResult result = new ReferencedActivitiesResult();
+			result.display(queryResult);
+		}
 	}
 
 	private List<String> selectedActivities(Tree tree) {
-		List<Node> nodes = Arrays.asList(tree.getSelectedNodes());
-		
-		return nodes.stream()
-				.map(Node::getUserObject)
-				.filter(Activity.class::isInstance)
-				.map(Activity.class::cast)
-				.map(Activity::getID)
-				.collect(Collectors.toList());
+		return Arrays.asList(tree.getSelectedNodes())
+		             .stream()
+		             .map(Node::getUserObject)
+		             .filter(Activity.class::isInstance)
+		             .map(Activity.class::cast)
+		             .map(Activity::getID)
+		             .collect(Collectors.toList());
 	}
 
 }
