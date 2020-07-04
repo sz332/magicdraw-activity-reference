@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
 
 import com.acme.magicdraw.activity.ui.query.CallerActivitiesQuery;
 import com.acme.magicdraw.activity.ui.query.CallerActivitiesQueryResult;
-import com.acme.magicdraw.activity.ui.result.ReferencedActivitiesResult;
+import com.acme.magicdraw.activity.ui.view.ReferencedActivitiesView;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.ui.browser.Node;
@@ -40,8 +40,8 @@ public class CalculateActivityReferencesAction extends DefaultBrowserAction {
 			CallerActivitiesQuery query = new CallerActivitiesQuery(project, selectedActivityIds);
 			CallerActivitiesQueryResult queryResult = query.execute();
 
-			ReferencedActivitiesResult result = new ReferencedActivitiesResult();
-			result.display(queryResult);
+			ReferencedActivitiesView view = new ReferencedActivitiesView();
+			view.display(queryResult);
 		}
 	}
 

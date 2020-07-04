@@ -1,11 +1,11 @@
-package com.acme.magicdraw.activity.ui.result;
+package com.acme.magicdraw.activity.ui.view;
 
 import com.acme.magicdraw.activity.ui.query.CallerActivitiesQueryResult;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.ui.browser.Browser;
 import com.nomagic.magicdraw.ui.browser.SearchResultsTree;
 
-public class ReferencedActivitiesResult {
+public class ReferencedActivitiesView {
 
 	public void display(CallerActivitiesQueryResult queryResult) {
 
