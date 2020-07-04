@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin
+        id="activityReferences"
+        name="Activity references"
+        version="1.0"
+        provider-name="Zsolt Sandor"
+        class="com.acme.magicdraw.activity.ActivityReferencesPlugin">
+
+    <requires>
+        <api version="1.2"/>
+    </requires>
+
+    <runtime>
+        <library name="activityreferences.jar"/>
+    </runtime>
+</plugin>
