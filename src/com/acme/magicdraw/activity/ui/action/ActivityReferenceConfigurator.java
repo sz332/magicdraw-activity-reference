@@ -1,11 +1,11 @@
 package com.acme.magicdraw.activity.ui.action;
 
-import com.nomagic.actions.AMConfigurator;
 import com.nomagic.actions.ActionsCategory;
 import com.nomagic.actions.ActionsManager;
 import com.nomagic.magicdraw.actions.ActionsID;
 import com.nomagic.magicdraw.actions.BrowserContextAMConfigurator;
 import com.nomagic.magicdraw.ui.browser.Tree;
+import com.nomagic.magicdraw.utils.PriorityProvider;
 
 public class ActivityReferenceConfigurator implements BrowserContextAMConfigurator {
 
@@ -14,7 +14,7 @@ public class ActivityReferenceConfigurator implements BrowserContextAMConfigurat
 
 	@Override
 	public int getPriority() {
-		return AMConfigurator.LOW_PRIORITY;
+		return PriorityProvider.LOW_PRIORITY;
 	}
 
 	@Override
