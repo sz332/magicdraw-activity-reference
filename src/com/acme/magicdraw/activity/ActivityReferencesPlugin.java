@@ -9,8 +9,6 @@ public class ActivityReferencesPlugin extends Plugin {
 
 	@Override
 	public void init() {
-		System.out.println("Activities reference plugin initialized");
-		Application.getInstance().getGUILog().showMessage("Activities reference initialized");
 		ActionsConfiguratorsManager.getInstance().addContainmentBrowserContextConfigurator(new ActivityReferenceConfigurator());
 	}
 
