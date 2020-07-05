@@ -1,10 +1,11 @@
 package com.acme.magicdraw.activity.ui.query;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.nomagic.magicdraw.core.Project;
@@ -29,13 +30,10 @@ public class CallerActivitiesQuery {
 	 */
 	public CallerActivitiesQueryResult execute() {
 
-		Map<String, List<Activity>> retValue = new HashMap<>();
-
-		Collection<Activity> allActivities = Finder.byTypeRecursively()
-		                                           .find(project, new Class[] { Activity.class });
+		Map<String, Set<Activity>> retValue = new HashMap<>();
 
 		// for every activities
-		for (Activity activity : allActivities) {
+		for (Activity activity : findAllActivities(project)) {
 
 			// for every activity called by that particular activity
 			for (Activity calledActivity : findCalledActivities(activity)) {
@@ -44,18 +42,12 @@ public class CallerActivitiesQuery {
 
 				// if the called activity is among the list of targets
 				if (targetActivities.contains(calledActivityId)) {
-
+					
 					// if the associated list does not exist, create it
-					if (!retValue.containsKey(calledActivityId)) {
-						retValue.put(calledActivityId, new ArrayList<>());
-					}
+					retValue.computeIfAbsent(calledActivityId, key -> new HashSet<>());
 
-					List<Activity> actList = retValue.get(calledActivityId);
-
-					// if the caller activity was not added yet, add it to the list
-					if (!actList.contains(activity)) {
-						actList.add(activity);
-					}
+					// add activity to the set
+					retValue.get(calledActivityId).add(activity);
 				}
 
 			}
@@ -67,20 +59,39 @@ public class CallerActivitiesQuery {
 
 	/**
 	 * Return the list of activities called from the input activity
+	 * 
 	 * @param activity
 	 * @return
 	 */
 	private List<Activity> findCalledActivities(Activity activity) {
 
-		Collection<CallBehaviorAction> actions = Finder
-													.byTypeRecursively()
-													.find(activity, new Class[] { CallBehaviorAction.class }, false);
+		Collection<CallBehaviorAction> actions = findBehaviorActions(activity);
 
 		return actions.stream()
 		              .map(CallBehaviorAction::getBehavior)
 		              .filter(Activity.class::isInstance)
 		              .map(Activity.class::cast)
 		              .collect(Collectors.toList());
+	}
+
+	/**
+	 * Find activities in a project
+	 * @param project
+	 * @return
+	 */
+	private Collection<Activity> findAllActivities(Project project) {
+		return Finder.byTypeRecursively()
+		             .find(project, new Class[] { Activity.class });
+	}
+
+	/**
+	 * Find behavior actions of an activity
+	 * @param activity
+	 * @return
+	 */
+	private Collection<CallBehaviorAction> findBehaviorActions(Activity activity) {
+		return Finder.byTypeRecursively()
+		             .find(activity, new Class[] { CallBehaviorAction.class }, false);
 	}
 
 }

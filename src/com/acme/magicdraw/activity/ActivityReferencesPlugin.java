@@ -2,7 +2,6 @@ package com.acme.magicdraw.activity;
 
 import com.acme.magicdraw.activity.ui.action.ActivityReferenceConfigurator;
 import com.nomagic.magicdraw.actions.ActionsConfiguratorsManager;
-import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.plugins.Plugin;
 
 public class ActivityReferencesPlugin extends Plugin {

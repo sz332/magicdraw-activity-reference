@@ -3,10 +3,7 @@ package com.acme.magicdraw.activity.ui.action;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-
-import javax.annotation.Nonnull;
 
 import com.acme.magicdraw.activity.ui.query.CallerActivitiesQuery;
 import com.acme.magicdraw.activity.ui.query.CallerActivitiesQueryResult;
@@ -32,8 +29,7 @@ public class CalculateActivityReferencesAction extends DefaultBrowserAction {
 
 		if (tree != null) {
 
-			Project project = Application.getInstance()
-			                             .getProject();
+			Project project = Application.getInstance().getProject();
 			
 			List<String> selectedActivityIds = selectedActivities(tree);
 

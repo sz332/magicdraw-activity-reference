@@ -9,9 +9,7 @@ public class ReferencedActivitiesView {
 
 	public void display(CallerActivitiesQueryResult queryResult) {
 
-		Browser browser = Application.getInstance()
-		                             .getMainFrame()
-		                             .getBrowser();
+		Browser browser = Application.getInstance().getMainFrame().getBrowser();
 
 		if (browser != null) {
 			SearchResultsTree searchResultTree = browser.getSearchResultsTree(true);
