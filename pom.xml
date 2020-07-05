@@ -7,11 +7,11 @@
 	<version>1.0.0</version>
 	<name>Magicdraw activity references plugin</name>
 	<properties>
-		    <maven.compiler.source>1.8</maven.compiler.source>
-    		<maven.compiler.target>1.8</maven.compiler.target>
-    		<magicdraw.home>E:/Programs/Cameo</magicdraw.home>
-    		<magicdraw.lib>${magicdraw.home}/lib</magicdraw.lib>
-    		<magicdraw.bundles>${magicdraw.lib}/bundles</magicdraw.bundles>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<magicdraw.home>E:/Programs/Cameo</magicdraw.home>
+		<magicdraw.lib>${magicdraw.home}/lib</magicdraw.lib>
+		<magicdraw.bundles>${magicdraw.lib}/bundles</magicdraw.bundles>
 	</properties>
 	<build>
 		<finalName>activityreferences</finalName>
